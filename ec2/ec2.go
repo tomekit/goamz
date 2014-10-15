@@ -28,19 +28,20 @@ import (
 	"github.com/mitchellh/goamz/aws"
 )
 
-const debug = false
+const debug = true
 
 // The EC2 type encapsulates operations with a specific EC2 region.
 type EC2 struct {
 	aws.Auth
 	aws.Region
 	httpClient *http.Client
+	signer *aws.V4Signer
 	private    byte // Reserve the right of using private data.
 }
 
 // New creates a new EC2.
 func NewWithClient(auth aws.Auth, region aws.Region, client *http.Client) *EC2 {
-	return &EC2{auth, region, client, 0}
+	return &EC2{auth, region, client, aws.NewV4Signer(auth, "ec2", region), 0}
 }
 
 func New(auth aws.Auth, region aws.Region) *EC2 {
@@ -136,13 +137,20 @@ func (ec2 *EC2) query(params map[string]string, resp interface{}) error {
 	if endpoint.Path == "" {
 		endpoint.Path = "/"
 	}
-	sign(ec2.Auth, "GET", endpoint.Path, params, endpoint.Host)
+	//sign(ec2.Auth, "GET", endpoint.Path, params, endpoint.Host)
 	endpoint.RawQuery = multimap(params).Encode()
 	if debug {
-		log.Printf("get { %v } -> {\n", endpoint.String())
+		log.Printf("GET { %v } -> {\n", endpoint.String())
 	}
 
-	r, err := ec2.httpClient.Get(endpoint.String())
+	request, err := http.NewRequest("GET", endpoint.String(), nil)
+	if err != nil {
+		return err
+	}
+
+	ec2.signer.Sign(request)
+
+	r, err := ec2.httpClient.Do(request)
 	if err != nil {
 		return err
 	}
