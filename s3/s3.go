@@ -16,7 +16,7 @@ import (
 	"encoding/base64"
 	"encoding/xml"
 	"fmt"
-	"github.com/mitchellh/goamz/aws"
+	"github.com/tomekit/goamz/aws"
 	"io"
 	"io/ioutil"
 	"log"
@@ -469,41 +469,41 @@ type Key struct {
 //
 // For example, given these keys in a bucket:
 //
-//     index.html
-//     index2.html
-//     photos/2006/January/sample.jpg
-//     photos/2006/February/sample2.jpg
-//     photos/2006/February/sample3.jpg
-//     photos/2006/February/sample4.jpg
+//	index.html
+//	index2.html
+//	photos/2006/January/sample.jpg
+//	photos/2006/February/sample2.jpg
+//	photos/2006/February/sample3.jpg
+//	photos/2006/February/sample4.jpg
 //
 // Listing this bucket with delimiter set to "/" would yield the
 // following result:
 //
-//     &ListResp{
-//         Name:      "sample-bucket",
-//         MaxKeys:   1000,
-//         Delimiter: "/",
-//         Contents:  []Key{
-//             {Key: "index.html", "index2.html"},
-//         },
-//         CommonPrefixes: []string{
-//             "photos/",
-//         },
-//     }
+//	&ListResp{
+//	    Name:      "sample-bucket",
+//	    MaxKeys:   1000,
+//	    Delimiter: "/",
+//	    Contents:  []Key{
+//	        {Key: "index.html", "index2.html"},
+//	    },
+//	    CommonPrefixes: []string{
+//	        "photos/",
+//	    },
+//	}
 //
 // Listing the same bucket with delimiter set to "/" and prefix set to
 // "photos/2006/" would yield the following result:
 //
-//     &ListResp{
-//         Name:      "sample-bucket",
-//         MaxKeys:   1000,
-//         Delimiter: "/",
-//         Prefix:    "photos/2006/",
-//         CommonPrefixes: []string{
-//             "photos/2006/February/",
-//             "photos/2006/January/",
-//         },
-//     }
+//	&ListResp{
+//	    Name:      "sample-bucket",
+//	    MaxKeys:   1000,
+//	    Delimiter: "/",
+//	    Prefix:    "photos/2006/",
+//	    CommonPrefixes: []string{
+//	        "photos/2006/February/",
+//	        "photos/2006/January/",
+//	    },
+//	}
 //
 // See http://goo.gl/YjQTc for details.
 func (b *Bucket) List(prefix, delim, marker string, max int) (result *ListResp, err error) {
