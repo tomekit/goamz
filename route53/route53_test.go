@@ -8,8 +8,8 @@ import (
 	"log"
 	"testing"
 
-	"github.com/mitchellh/goamz/aws"
-	"github.com/mitchellh/goamz/testutil"
+	"github.com/tomekit/goamz/aws"
+	"github.com/tomekit/goamz/testutil"
 )
 
 var testServer *testutil.HTTPServer

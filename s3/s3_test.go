@@ -8,10 +8,10 @@ import (
 
 	"time"
 
-	"github.com/mitchellh/goamz/aws"
-	"github.com/mitchellh/goamz/s3"
-	"github.com/mitchellh/goamz/testutil"
 	. "github.com/motain/gocheck"
+	"github.com/tomekit/goamz/aws"
+	"github.com/tomekit/goamz/s3"
+	"github.com/tomekit/goamz/testutil"
 )
 
 func Test(t *testing.T) {

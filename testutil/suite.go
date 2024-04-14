@@ -2,8 +2,8 @@ package testutil
 
 import (
 	"flag"
-	"github.com/mitchellh/goamz/aws"
 	. "github.com/motain/gocheck"
+	"github.com/tomekit/goamz/aws"
 )
 
 // Amazon must be used by all tested packages to determine whether to

@@ -1,10 +1,10 @@
 package iam_test
 
 import (
-	"github.com/mitchellh/goamz/aws"
-	"github.com/mitchellh/goamz/iam"
-	"github.com/mitchellh/goamz/iam/iamtest"
 	. "github.com/motain/gocheck"
+	"github.com/tomekit/goamz/aws"
+	"github.com/tomekit/goamz/iam"
+	"github.com/tomekit/goamz/iam/iamtest"
 )
 
 // LocalServer represents a local ec2test fake server.

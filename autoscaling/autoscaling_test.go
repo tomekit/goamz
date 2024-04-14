@@ -3,10 +3,10 @@ package autoscaling_test
 import (
 	"testing"
 
-	"github.com/mitchellh/goamz/autoscaling"
-	"github.com/mitchellh/goamz/aws"
-	"github.com/mitchellh/goamz/testutil"
 	. "github.com/motain/gocheck"
+	"github.com/tomekit/goamz/autoscaling"
+	"github.com/tomekit/goamz/aws"
+	"github.com/tomekit/goamz/testutil"
 )
 
 func Test(t *testing.T) {
@@ -79,7 +79,7 @@ func (s *S) Test_CreateLaunchConfiguration(c *C) {
 		KeyName:        "foobar",
 		Name:           "i-141421",
 		UserData:       "#!/bin/bash\necho Hello\n",
-		BlockDevices:   []autoscaling.BlockDeviceMapping{
+		BlockDevices: []autoscaling.BlockDeviceMapping{
 			{DeviceName: "/dev/sdb", VirtualName: "ephemeral0"},
 			{DeviceName: "/dev/sdc", SnapshotId: "snap-a08912c9", DeleteOnTermination: true},
 		},

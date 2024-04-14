@@ -25,7 +25,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/mitchellh/goamz/aws"
+	"github.com/tomekit/goamz/aws"
 )
 
 const debug = true
@@ -35,7 +35,7 @@ type EC2 struct {
 	aws.Auth
 	aws.Region
 	httpClient *http.Client
-	signer *aws.V4Signer
+	signer     *aws.V4Signer
 	private    byte // Reserve the right of using private data.
 }
 
@@ -54,11 +54,10 @@ func New(auth aws.Auth, region aws.Region) *EC2 {
 // Filter builds filtering parameters to be used in an EC2 query which supports
 // filtering.  For example:
 //
-//     filter := NewFilter()
-//     filter.Add("architecture", "i386")
-//     filter.Add("launch-index", "0")
-//     resp, err := ec2.Instances(nil, filter)
-//
+//	filter := NewFilter()
+//	filter.Add("architecture", "i386")
+//	filter.Add("launch-index", "0")
+//	resp, err := ec2.Instances(nil, filter)
 type Filter struct {
 	m map[string][]string
 }
@@ -1501,7 +1500,8 @@ func (ec2 *EC2) ImagesByOwners(ids []string, owners []string, filter *Filter) (r
 // ImageAttribute describes an attribute of an AMI.
 // You can specify only one attribute at a time.
 // Valid attributes are:
-//    description | kernel | ramdisk | launchPermission | productCodes | blockDeviceMapping
+//
+//	description | kernel | ramdisk | launchPermission | productCodes | blockDeviceMapping
 //
 // See http://goo.gl/bHO3zT for more details.
 func (ec2 *EC2) ImageAttribute(imageId, attribute string) (resp *ImageAttributeResp, err error) {
@@ -2729,7 +2729,8 @@ func (ec2 *EC2) DescribeVpcs(ids []string, filter *Filter) (resp *VpcsResp, err 
 // VpcAttribute describes an attribute of a VPC.
 // You can specify only one attribute at a time.
 // Valid attributes are:
-//    enableDnsSupport | enableDnsHostnames
+//
+//	enableDnsSupport | enableDnsHostnames
 //
 // See http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/index.html?ApiReference-query-DescribeVpcAttribute.html for more details.
 func (ec2 *EC2) VpcAttribute(vpcId, attribute string) (resp *VpcAttributeResp, err error) {
@@ -3348,7 +3349,7 @@ type DescribeCustomerGatewaysResp struct {
 	CustomerGateways []CustomerGateway `xml:"customerGatewaySet>item"`
 }
 
-//Create a customer gateway
+// Create a customer gateway
 func (ec2 *EC2) CreateCustomerGateway(options *CreateCustomerGateway) (resp *CreateCustomerGatewayResp, err error) {
 	params := makeParams("CreateCustomerGateway")
 	params["Type"] = options.Type

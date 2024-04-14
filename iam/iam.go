@@ -4,7 +4,7 @@ package iam
 
 import (
 	"encoding/xml"
-	"github.com/mitchellh/goamz/aws"
+	"github.com/tomekit/goamz/aws"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -407,7 +407,7 @@ func (iam *IAM) DeleteUserPolicy(userName, policyName string) (*SimpleResp, erro
 
 // Response for AddUserToGroup requests.
 //
-//  See http://goo.gl/ZnzRN for more details.
+//	See http://goo.gl/ZnzRN for more details.
 type AddUserToGroupResp struct {
 	RequestId string `xml:"ResponseMetadata>RequestId"`
 }
